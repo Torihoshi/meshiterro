@@ -3,13 +3,12 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "homes/about" => "homes#about", as: "about"
   resources :post_images, only: [:new, :create, :index, :show, :destroy]
-  resources :users, only: [:show, :edit]
+  resources :users, only: [:show, :edit, :update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
 
                 #                   Prefix Verb   URI Pattern                                                                                       Controller#Action
-                #                     root GET    /                                                                                                 homes#top
                 #         new_user_session GET    /users/sign_in(.:format)                                                                          devise/sessions#new
                 #             user_session POST   /users/sign_in(.:format)                                                                          devise/sessions#create
                 #     destroy_user_session DELETE /users/sign_out(.:format)                                                                         devise/sessions#destroy
@@ -25,8 +24,14 @@ end
                 #                         PUT    /users(.:format)                                                                                  devise/registrations#update
                 #                         DELETE /users(.:format)                                                                                  devise/registrations#destroy
                 #                         POST   /users(.:format)                                                                                  devise/registrations#create
+                #                     root GET    /                                                                                                 homes#top
+                #                   about GET    /homes/about(.:format)                                                                            homes#about
                 #             post_images GET    /post_images(.:format)                                                                            post_images#index
                 #                         POST   /post_images(.:format)                                                                            post_images#create
                 #           new_post_image GET    /post_images/new(.:format)                                                                        post_images#new
                 #               post_image GET    /post_images/:id(.:format)                                                                        post_images#show
-                #                   about GET    /homes/about(.:format)                                                                            homes#about
+                #                         DELETE /post_images/:id(.:format)                                                                        post_images#destroy
+                #               edit_user GET    /users/:id/edit(.:format)                                                                         users#edit
+                #                     user GET    /users/:id(.:format)                                                                              users#show
+                #                         PATCH  /users/:id(.:format)                                                                              users#update
+                #                         PUT    /users/:id(.:format)                                                                              users#update
