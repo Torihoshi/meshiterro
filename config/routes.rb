@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "homes#top"
-  get "homes/about" => "homes#about", as: "about"
-  resources :post_images, only: [:new, :create, :index, :show, :destroy]
+  get "/homes/about" => "homes#about", as: "about"
+  resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+    resources :post_comments, only: [:create, :destroy]
+  end
   resources :users, only: [:show, :edit, :update]
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
 
                 #                   Prefix Verb   URI Pattern                                                                                       Controller#Action
                 #         new_user_session GET    /users/sign_in(.:format)                                                                          devise/sessions#new
