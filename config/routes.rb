@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "/homes/about" => "homes#about", as: "about"
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+    resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
   resources :users, only: [:show, :edit, :update]
@@ -27,6 +28,10 @@ end
                 #                         POST   /users(.:format)                                                                                  devise/registrations#create
                 #                     root GET    /                                                                                                 homes#top
                 #                   about GET    /homes/about(.:format)                                                                            homes#about
+                #     post_image_favorites DELETE /post_images/:post_image_id/favorites(.:format)                                                   favorites#destroy
+                #                         POST   /post_images/:post_image_id/favorites(.:format)                                                   favorites#create
+                # post_image_post_comments POST   /post_images/:post_image_id/post_comments(.:format)                                               post_comments#create
+                # post_image_post_comment DELETE /post_images/:post_image_id/post_comments/:id(.:format)                                           post_comments#destroy
                 #             post_images GET    /post_images(.:format)                                                                            post_images#index
                 #                         POST   /post_images(.:format)                                                                            post_images#create
                 #           new_post_image GET    /post_images/new(.:format)                                                                        post_images#new
